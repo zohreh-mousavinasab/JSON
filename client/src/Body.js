@@ -14,42 +14,38 @@ class Bod extends Component {
   onJsonChange = (e) => {
     const value = e.target.value;
 
-    this.setState({
-      jsonValue: value,
-    });
+    this.setState({ 
+      jsonValue: value
+      
+    }
+      );
   }
 
- process=()=>  {
-  let data = this.state.jsonValue;
-  console.log("First step:" , data);
-  let dataObj = {msg:data};
-  dataObj = {msg: '{"start": 1456468630000, "id": "a73c1d19-f32d-4aff-b470-cea4e792406a"}'};
-  console.log("second step:" , dataObj);
+  process = () =>  {
+  let dataObj = {data:this.state.jsonValue};
+  
 
-  Client.processJson(dataObj,(res)=>{console.log(res.msg);})   ;
+  Client.processJson(dataObj,(res)=>{console.log(res.msg);});
 }
-    
-
     render() { 
         return (
-          // <form >
+           
           <div className="content-b">
 
           <p className="upload">Upload your file:</p>
-          {/* <OpenFilebutton/> */}
+          <OpenFilebutton/> 
 
           <p>JSON URL:</p>
-          {/* <UrlvalidComponent/> */}
+          <UrlvalidComponent/> 
 
           <p className="textarea-l">Paste your JSON object:</p>
           <textarea className="textarea" 
            value={this.state.jsonValue}
            onChange={this.onJsonChange}>
             </textarea>
-
           <button  type="submit" className="butt" onClick={this.process}><b>Process</b></button>
           </div>
-          // </form>
+          
     );
     
 }

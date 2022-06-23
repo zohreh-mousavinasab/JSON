@@ -11,7 +11,7 @@ app.set('port', (process.env.API_PORT || 3001));
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -28,26 +28,14 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.get('/api/parseJson', (req, res) => {
-  console.log(req.query.data);
-  try{
-  const obj = JSON.parse(req.query.data);
-  if(typeof obj === "object") 
-  {
-    res.json({msg:obj})
-  }else{
-    res.json({msg:'wrong json'});
-  }
-}catch(e){
-  res.json({msg:'error json'});
-}
-});
+
+
 app.post('/api/parseJson', (req, res) => {
-  console.log("Server First Step:" , req.body);
+  
   let jsonObj = JSON.parse(JSON.stringify(req.body));
-  console.log("Server Second Step:" , jsonObj);
+  
   let jsonText = jsonObj.msg;
-  console.log("Server Third Step:" , jsonText);
+
 
   
   try{
@@ -62,7 +50,7 @@ app.post('/api/parseJson', (req, res) => {
   }
 }catch(e){
   console.log('error');
-  res.json({msg:'ERRORJSON'});
+  res.json({msg:'ERROR'});
 }
 });
 
