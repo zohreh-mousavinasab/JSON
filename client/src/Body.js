@@ -44,6 +44,7 @@ class Bod extends Component {
            onChange={this.onJsonChange}>
             </textarea>
           <button  type="submit" className="butt" onClick={this.process}><b>Process</b></button>
+          
           </div>
           
     );

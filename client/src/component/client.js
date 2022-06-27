@@ -21,13 +21,13 @@
       error.response = response;
       
       throw error;
-    }
+    } 
   }
   function expHandler(e){
   console.log("exption:",e)
-
-
+  
   }
+
  const Client = {processJson};
 export default Client;
     

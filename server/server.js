@@ -1,60 +1,68 @@
-/* eslint-disable no-param-reassign */
+const express = require('express')
+const app = express()
+
+app.get('/', function (req, res) {
+  res.send('zozo&sedigh')
+})
+app.listen(3001, ()=> {
+  console.log('Server is listening at 3001')
+})
 
 
-const express = require('express');
-const fs = require('fs');
+const cors = require('cors');
+app.use(cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false}
+    ));
+
+
 const bodyParser = require('body-parser');
-const path = require('path');
-const { json } = require('body-parser');
-const app = express();
-app.set('port', (process.env.API_PORT || 3001));
-app.use(function (req, res, next) {
-
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  // Pass to next layer of middleware
-  next();
-});
+// const { json } = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// const path = require('path');
+// const filename = path.basename('مسیر فایل');
+// console.log(filename);
+
+// const http = require('http');
+// const fs = require('fs');
+// http.createServer(function (req, res) {
+  //   fs.readFile('filename ', function(err, data) {
+    //     res.writeHead(200, {'Content-Type': 'text/html'});
+    //     res.write(data);
+    //     res.end();
+    //   });
+    // }).listen(3001);
+    
+    
+// const url = require('url');
+// const adr = 'http://localhost:port??/لینک کپی شده';
+// const q = url.parse(adr, true);
+// const qdata = q.query; //returns an object
+    
+
+
 
 app.post('/api/parseJson', (req, res) => {
-  
-  let jsonObj = JSON.parse(JSON.stringify(req.body));
-  
-  let jsonText = jsonObj.msg;
+let jsonObj = JSON.parse(JSON.stringify(req.body));
+let jsonText = jsonObj.msg;
 
-
-  
-  try{
-  const obj = JSON.parse(jsonText);
-  if(typeof obj === "object") 
-  {
-    console.log('right');
-    res.json({msg:"right json"})
-  }else{
-    console.log('wrong');
-    res.json({msg:'wrong json'});
-  }
-}catch(e){
-  console.log('error');
-  res.json({msg:'ERROR'});
+try{
+const obj = JSON.parse(jsonText);
+if(typeof obj === "object") 
+{
+  console.log('right');
+  res.json({msg:"right json"})
+}else{
+  console.log('wrong');
+  res.json({msg:'wrong json'});
 }
-});
+}catch(e){
+console.log('error');
+res.json({msg:'Error'});
+}
+});     
 
 
-app.listen(app.get('port'), () => {
-  console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
-});

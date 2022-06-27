@@ -108,3 +108,14 @@ body{
     border: none;
     
 }
+.answer{
+    /* background-color: #f9ad8f; */
+    color: #F61C04;
+    width: 30vh;
+    height: 6vh;
+    border-radius: .7vh;
+     border-color: #F61C04; 
+    margin-left: 90vh;
+    margin-top: -16rem; 
+        
+}
